@@ -58,7 +58,7 @@ CultureIHT 【教養ハプニング表】
 -代償-
 `;
 
-var full2half = function () {
+var full2half = function (str) {
   str = str.replace(/[０-９]/g, function (s) {
     return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
   });
