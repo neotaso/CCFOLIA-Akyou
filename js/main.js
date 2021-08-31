@@ -58,6 +58,13 @@ CultureIHT 【教養ハプニング表】
 -代償-
 `;
 
+var full2half = function () {
+  str = str.replace(/[０-９]/g, function (s) {
+    return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
+  });
+  return str;
+};
+
 var run = function () {
   var target = document.getElementById("targetUrl").value;
   // target URL format: https://character-sheets.appspot.com/satasupe/edit.html?key=XXXXXX
@@ -152,8 +159,8 @@ var charaData = function (jsonData) {
           value: jsonData.base.power.destroy,
         },
         {
-          label: "性業値",
-          value: jsonData.base.emotion,
+          label: "性業値", 
+          value: full2half(jsonData.base.emotion), // no input check in emotion
         },
       ],
       width: 12,
@@ -210,8 +217,8 @@ var equipment = function (jsonData) {
     items.fill("", oldlen);
     if (vehicle.name != null) {
       items[items.length - 1] = vehicle.name;
-    } else if(vehicle.name != null){
-        items.push(vehicle.name);
+    } else if (vehicle.name != null) {
+      items.push(vehicle.name);
     }
   }
 
