@@ -7,17 +7,17 @@
     </head>
     <body>
         <div id ="inputs">
-            <input type="url" id="targetUrl" size="135em" placeholder="https://character-sheets.appspot.com/satasupe/edit.html?key=XXXXXXXXXXX">
+            <input type="url" id="targetUrl" size="135em" autocomplete="off" placeholder="https://character-sheets.appspot.com/satasupe/edit.html?key=XXXXXXXXXXX">
             <br>
             <button onclick="run()">run</button>
         </div>
         <div id="area1">
-            <textarea readonly id="chara" cols="80" rows="20" onclick="this.select()"></textarea>
-            <textarea readonly id="data" cols="40" rows="20" onclick="this.select()"></textarea>
+            <textarea readonly autocomplete="off" id="chara" cols="80" rows="20" onclick="this.select()"></textarea>
+            <textarea readonly autocomplete="off" id="data" cols="40" rows="20" onclick="this.select()"></textarea>
             <br>
-            <textarea readonly id="item" cols="30" rows="15" onclick="this.select()"></textarea>
-            <textarea readonly id="vehicle" cols="30" rows="15" onclick="this.select()"></textarea>
-            <textarea readonly id="hideout" cols="30" rows="15" onclick="this.select()"></textarea>
+            <textarea readonly autocomplete="off" id="item" cols="30" rows="15" onclick="this.select()"></textarea>
+            <textarea readonly autocomplete="off" id="vehicle" cols="30" rows="15" onclick="this.select()"></textarea>
+            <textarea readonly autocomplete="off" id="hideout" cols="30" rows="15" onclick="this.select()"></textarea>
         </div>
     </body>
 </html>
