@@ -1,23 +1,73 @@
 <!DOCTYPE html>
-<html lang='ja'>
-    <head>
-        <meta charset="utf-8">
-        <title>CCFOLIA Akyou</title>
-        <script src="js/main.js" type="text/javascript"></script>
-    </head>
-    <body>
-        <div id ="inputs">
-            <input type="url" id="targetUrl" size="135em" autocomplete="off" placeholder="https://character-sheets.appspot.com/satasupe/edit.html?key=XXXXXXXXXXX">
-            <br>
-            <button onclick="run()">run</button>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- import Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
+  <script src="js/main.js" type="text/javascript"></script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9XFGCHVWL7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-9XFGCHVWL7');
+  </script>
+
+  <title>CCFOLIA Akyou</title>
+</head>
+
+<body>
+  <div class="container">
+    <main>
+      <div class="py-5 text-center">
+        <h1>CCFOLIA Akyou</h1>
+        <p class="lead">キャラクター保管庫からCCFOLIA用のデータを作りたい</p>
+      </div>
+
+      <div class="row g-3" id="inputs">
+        <div>
+          <label for="targetUrl" class="form-label">キャラクターシートのURL</label>
+          <input type="url" class="form-control" id="targetUrl" size="120em" autocomplete="off"
+            placeholder="https://character-sheets.appspot.com/satasupe/edit.html?key=XXXXXXXXXXX" />
         </div>
-        <div id="area1">
-            <textarea readonly autocomplete="off" id="chara" cols="80" rows="20" onclick="this.select()"></textarea>
-            <textarea readonly autocomplete="off" id="data" cols="40" rows="20" onclick="this.select()"></textarea>
-            <br>
-            <textarea readonly autocomplete="off" id="item" cols="30" rows="15" onclick="this.select()"></textarea>
-            <textarea readonly autocomplete="off" id="vehicle" cols="30" rows="15" onclick="this.select()"></textarea>
-            <textarea readonly autocomplete="off" id="hideout" cols="30" rows="15" onclick="this.select()"></textarea>
+        <button class="w-100 btn btn-primary btn-lg" onclick="run()">生成</button>
+      </div>
+
+      <div class="row py-5 g-3" id="area1">
+        <div class="col-sm-8">
+          <textarea readonly class="form-control" autocomplete="off" rows="10" id="chara"
+            onclick="this.select()"></textarea>
         </div>
-    </body>
+        <div class="col-sm-4">
+          <textarea readonly class="form-control" autocomplete="off" rows="10" id="data"
+            onclick="this.select()"></textarea>
+        </div>
+        <div class="col-sm">
+          <textarea readonly class="form-control" autocomplete="off" rows="10" id="item"
+            onclick="this.select()"></textarea>
+        </div>
+        <div class="col-sm">
+          <textarea readonly class="form-control" autocomplete="off" rows="10" id="vehicle"
+            onclick="this.select()"></textarea>
+        </div>
+        <div class="col-sm">
+          <textarea readonly class="form-control" autocomplete="off" rows="10" id="hideout"
+            onclick="this.select()"></textarea>
+        </div>
+      </div>
+    </main>
+  </div>
+  <!-- import Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

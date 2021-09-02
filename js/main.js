@@ -159,7 +159,7 @@ var charaData = function (jsonData) {
           value: jsonData.base.power.destroy,
         },
         {
-          label: "性業値", 
+          label: "性業値",
           value: full2half(jsonData.base.emotion), // no input check in emotion
         },
       ],
@@ -245,9 +245,8 @@ var vehicleEquipment = function (jsonData) {
     burdenItems.fill("", oldlen);
   }
 
-  let vehicles = `乗物\n(ス${vehicle.speed ?? "X"}, 車${
-    vehicle.frame ?? "X"
-  }, 荷${vehicle.burden ?? "X"})\n`;
+  let vehicles = `乗物\n(ス${vehicle.speed ?? "X"}, 車${vehicle.frame ?? "X"
+    }, 荷${vehicle.burden ?? "X"})\n`;
   if (vehicle.burden != null) {
     vehicles =
       vehicles + burdenItems.reduce((p, c, i) => p + `${i + 1}. ${c}\n`, "");
