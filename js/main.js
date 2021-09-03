@@ -82,6 +82,10 @@ var run = function () {
   parent.parentNode.insertBefore(sc, parent);
 };
 
+var vehicleParameter = function (vehicle) {
+  return `(ス${vehicle.speed ?? "X"}, 車${vehicle.frame ?? "X"}, 荷${vehicle.burden ?? "X"})`
+};
+
 var charaData = function (jsonData) {
   let character = {
     kind: "character",
@@ -216,11 +220,12 @@ var equipment = function (jsonData) {
     items.length = limit;
     items.fill("", oldlen);
     if (vehicle.name != null) {
-      items[items.length - 1] = vehicle.name;
-    } else if (vehicle.name != null) {
-      items.push(vehicle.name);
+      items[items.length - 1] = vehicle.name + vehicleParameter(vehicle);
     }
+  } else if (vehicle.name != null) {
+    items.push(vehicle.name + vehicleParameter(vehicle));
   }
+
 
   let item =
     `装備(上限${limit})\n` +
@@ -245,8 +250,7 @@ var vehicleEquipment = function (jsonData) {
     burdenItems.fill("", oldlen);
   }
 
-  let vehicles = `乗物\n(ス${vehicle.speed ?? "X"}, 車${vehicle.frame ?? "X"
-    }, 荷${vehicle.burden ?? "X"})\n`;
+  let vehicles = `${vehicle.name ?? "乗物"}${vehicleParameter(vehicle)}\n`;
   if (vehicle.burden != null) {
     vehicles =
       vehicles + burdenItems.reduce((p, c, i) => p + `${i + 1}. ${c}\n`, "");
@@ -261,10 +265,21 @@ var hideoutEquipment = function (jsonData) {
   let hideoutWeapons = jsonData.weapons
     .filter((v) => v.name != null && v.place == "アジト")
     .map((v) => v.name);
+
   let hideoutOutfits = jsonData.outfits
     .filter((v) => v.name != null && v.place == "アジト")
     .map((v) => v.name);
+
   let hideoutItems = hideoutWeapons.concat(hideoutOutfits);
+
+  if (jsonData.vehicles.length > 1) {
+    jsonData.vehicles.forEach((e, i) => {
+      if (e.name != null && i > 0) {
+        hideoutItems.push(e.name + vehicleParameter(e));
+      }
+    });
+  }
+
   if (hideoutItems.length < 10) {
     let oldlen = hideoutItems.length;
     hideoutItems.length = 10;
@@ -272,9 +287,9 @@ var hideoutEquipment = function (jsonData) {
   }
 
   let area = jsonData.home.place;
-  let hideout = `アジト(${area})\n`;
+  let hideout = `アジト(${area}) \n`;
   hideout =
-    hideout + hideoutItems.reduce((p, c, i) => p + `${i + 1}. ${c}\n`, "");
+    hideout + hideoutItems.reduce((p, c, i) => p + `${i + 1}.${c} \n`, "");
 
   document.getElementById("hideout").value = hideout;
 };
