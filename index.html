@@ -18,7 +18,6 @@
   <!-- import Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
-  <script src="js/main.js" type="text/javascript"></script>
 
   <title>CCFOLIA Akyou</title>
 </head>
@@ -40,40 +39,98 @@
         <button class="w-100 btn btn-primary btn-lg" onclick="run()">生成</button>
       </div>
 
-      <div class="row py-5 g-3" id="area1">
+      <div class="row py-5 g-2" id="area1">
         <div class="col-sm-8">
-          <label for="chara" class="form-label">キャラコマデータ</label>
+          <label for="chara" class="form-label">
+            キャラコマデータ
+            <button type="button" class="btn btn-success clip" data-clipboard-target="#chara" id="chara-copy">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard"
+                viewBox="0 0 16 16">
+                <path
+                  d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                <path
+                  d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+              </svg> copy
+            </button>
+          </label>
           <textarea readonly class="form-control" autocomplete="off" rows="6" id="chara"
             onclick="this.select()"></textarea>
         </div>
         <div class="col-sm-4">
-          <label for="data" class="form-label">キャラデータ</label>
+          <label for="data" class="form-label">
+            キャラデータ
+            <button type="button" class="btn btn-success clip" data-clipboard-target="#data" id="data-copy">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard"
+                viewBox="0 0 16 16">
+                <path
+                  d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                <path
+                  d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+              </svg> copy
+            </button>
+          </label>
           <textarea readonly class="form-control" autocomplete="off" rows="6" id="data"
             onclick="this.select()"></textarea>
         </div>
         <div class="col-sm">
-          <label for="item" class="form-label">一般装備</label>
+          <label for="item" class="form-label">
+            一般装備
+            <button type="button" class="btn btn-success clip" data-clipboard-target="#item" id="item-copy">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard"
+                viewBox="0 0 16 16">
+                <path
+                  d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                <path
+                  d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+              </svg> copy
+            </button>
+          </label>
           <textarea readonly class="form-control" autocomplete="off" rows="6" id="item"
             onclick="this.select()"></textarea>
         </div>
         <div class="col-sm">
-          <label for="vehicle" class="form-label">乗物装備</label>
+          <label for="vehicle" class="form-label">
+            乗物装備
+            <button type="button" class="btn btn-success clip" data-clipboard-target="#vehicle" id="vehicle-copy">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard"
+                viewBox="0 0 16 16">
+                <path
+                  d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                <path
+                  d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+              </svg> copy
+            </button>
+          </label>
           <textarea readonly class="form-control" autocomplete="off" rows="6" id="vehicle"
             onclick="this.select()"></textarea>
         </div>
         <div class="col-sm">
-          <label for="hideout" class="form-label">アジト装備</label>
+          <label for="hideout" class="form-label">
+            アジト装備
+            <button type="button" class="btn btn-success clip" data-clipboard-target="hideout" id="hideout-copy">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard"
+                viewBox="0 0 16 16">
+                <path
+                  d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                <path
+                  d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+              </svg> copy
+            </button>
+          </label>
           <textarea readonly class="form-control" autocomplete="off" rows="6" id="hideout"
             onclick="this.select()"></textarea>
         </div>
       </div>
     </main>
   </div>
-
+  <!-- load clipboard.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
   <!-- import Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
     crossorigin="anonymous"></script>
+  <!-- load main scripts -->
+  <script src="js/main.js" type="text/javascript"></script>
 </body>
 
 </html>

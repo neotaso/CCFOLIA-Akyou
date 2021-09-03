@@ -286,3 +286,29 @@ var myFunc = function (jsonData) {
   vehicleEquipment(jsonData);
   hideoutEquipment(jsonData);
 };
+
+// コピーのTooltip有効化
+document.querySelectorAll('.clip').forEach(a => {
+  a.setAttribute("title", "クリップボードにコピー")
+  var tooltip = new bootstrap.Tooltip(a);
+  a.addEventListener('mouseleave', function () {
+    tooltip.hide()
+  })
+})
+
+
+// Clipboard制御
+var clipboard = new ClipboardJS('.clip');
+
+clipboard.on('success', function (e) {
+  var tooltip = bootstrap.Tooltip.getInstance(e.trigger);
+  e.trigger.setAttribute('data-bs-original-title', 'Copied!');
+  tooltip.show();
+  e.trigger.setAttribute('data-bs-original-title', 'クリップボードにコピー');
+  e.clearSelection();
+});
+
+clipboard.on('error', function (e) {
+  console.error('Action:', e.action);
+  console.error('Trigger:', e.trigger);
+});
