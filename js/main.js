@@ -204,28 +204,49 @@ ${price}
   document.getElementById("data").value = data;
 };
 
+// 一般装備
 var equipment = function (jsonData) {
-  // 一般装備
   let limit = jsonData.outfitstotal.limit;
-  let weapons = jsonData.weapons
-    .filter((v) => v.name != null && v.place == null)
-    .map((v) => v.name);
+  let weapons = [];
+  if (document.getElementById("weaponCheck").checked == false) {
+    weapons = jsonData.weapons
+      .filter((v) => v.name != null && v.place == null)
+      .map((v) => v.name);
+  }
   let outfits = jsonData.outfits
     .filter((v) => v.name != null && v.place == null)
     .map((v) => v.name);
   let items = weapons.concat(outfits);
-  let vehicle = jsonData.vehicles[0];
-  if (items.length < limit) {
-    let oldlen = items.length;
-    items.length = limit;
-    items.fill("", oldlen);
-    if (vehicle.name != null) {
-      items[items.length - 1] = vehicle.name + vehicleParameter(vehicle);
+  if (document.getElementById("vehicleCheck").checked == false) {
+    let vehicle = jsonData.vehicles[0];
+    if (items.length < limit) {
+      let oldlen = items.length;
+      items.length = limit;
+      items.fill("", oldlen);
+      if (vehicle.name != null) {
+        items[items.length - 1] = vehicle.name + vehicleParameter(vehicle);
+      }
+    } else if (vehicle.name != null) {
+      items.push(vehicle.name + vehicleParameter(vehicle));
     }
-  } else if (vehicle.name != null) {
-    items.push(vehicle.name + vehicleParameter(vehicle));
+  } else {
+    jsonData.vehicles.forEach(v => {
+      if (v.name != null) {
+        items = items.map(e => {
+          if (e == v.name) {
+            return e + vehicleParameter(v);
+          } else {
+            return e;
+          }
+        })
+      }
+    })
+    if (items.length < limit) {
+      let oldlen = items.length;
+      items.length = limit;
+      items.fill("", oldlen);
+    }
   }
-
 
   let item =
     `装備(上限${limit})\n` +
@@ -237,6 +258,12 @@ var equipment = function (jsonData) {
 var vehicleEquipment = function (jsonData) {
   // 乗物/乗物装備
   let vehicle = jsonData.vehicles[0];
+  if (document.getElementById("vehicleCheck").checked == true) {
+    jsonData.vehicles.forEach(v => {
+      if (v.name != null && jsonData.outfits.some(e => e.name == v.name && e.place == null))
+        vehicle = v;
+    })
+  }
   let burdenWeapons = jsonData.weapons
     .filter((v) => v.name != null && v.place == "乗物")
     .map((v) => v.name);
@@ -262,22 +289,38 @@ var vehicleEquipment = function (jsonData) {
 };
 
 var hideoutEquipment = function (jsonData) {
-  let hideoutWeapons = jsonData.weapons
-    .filter((v) => v.name != null && v.place == "アジト")
-    .map((v) => v.name);
-
+  let hideoutWeapons = []
+  if (document.getElementById("weaponCheck").checked == false) {
+    hideoutWeapons = jsonData.weapons
+      .filter((v) => v.name != null && v.place == "アジト")
+      .map((v) => v.name);
+  }
   let hideoutOutfits = jsonData.outfits
     .filter((v) => v.name != null && v.place == "アジト")
     .map((v) => v.name);
 
   let hideoutItems = hideoutWeapons.concat(hideoutOutfits);
 
-  if (jsonData.vehicles.length > 1) {
-    jsonData.vehicles.forEach((e, i) => {
-      if (e.name != null && i > 0) {
-        hideoutItems.push(e.name + vehicleParameter(e));
+  if (document.getElementById("vehicleCheck").checked == false) {
+    if (jsonData.vehicles.length > 1) {
+      jsonData.vehicles.forEach((e, i) => {
+        if (e.name != null && i > 0) {
+          hideoutItems.push(e.name + vehicleParameter(e));
+        }
+      });
+    }
+  } else {
+    jsonData.vehicles.forEach(v => {
+      if (v.name != null) {
+        hideoutItems = hideoutItems.map(e => {
+          if (e == v.name) {
+            return e + vehicleParameter(v);
+          } else {
+            return e;
+          }
+        })
       }
-    });
+    })
   }
 
   if (hideoutItems.length < 10) {
