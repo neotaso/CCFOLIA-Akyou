@@ -27,6 +27,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
 
+  <!-- import custom CSS -->
+  <link href="css/main.css" rel="stylesheet">
   <title>CCFOLIA Akyou</title>
 </head>
 
@@ -39,13 +41,60 @@
       </div>
 
       <div class="row g-3" id="inputs">
-        <div>
+        <div class="col-12">
           <label for="targetUrl" class="form-label">キャラクターシートのURL</label>
-          <input type="url" class="form-control" id="targetUrl" size="120em" autocomplete="off"
+          <input type="url" class="form-control" id="targetUrl" autocomplete="off"
             placeholder="https://character-sheets.appspot.com/satasupe/edit.html?key=XXXXXXXXXXX" />
         </div>
-        <button class="w-100 btn btn-primary btn-lg" onclick="run()">生成</button>
       </div>
+      <div class="p-4 m-2 g-2 border">
+        <p>オプション</p>
+        <div id="options">
+          <div class="g-4 m-2">
+            <div class="m-2">一般装備の一覧関連</div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="weaponCheck">
+              <label for="weaponCheck" class="form-check-label">
+                武器欄をデータとして扱う
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="vehicleCheck">
+              <label for="vheicleCheck" class="form-check-label">
+                乗物欄をデータとして扱う
+              </label>
+            </div>
+          </div>
+          <div class="g-4 m-2">
+            <div class="m-2">ステータス追加(開発中)</div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="costCheck" disabled>
+              <label for="costCheck" class="form-check-label">
+                コスト
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mealCheck" disabled>
+              <label for="mealCheck" class="form-check-label">
+                食事
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="sakeCheck" disabled>
+              <label for="sakeCheck" class="form-check-label">
+                酒
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="moneyCheck" disabled>
+              <label for="moneyCheck" class="form-check-label">
+                ジャリ銭
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="w-100 btn btn-primary btn-lg" onclick="run()">生成</button>
 
       <div class="row py-5 g-2" id="area1">
         <div class="col-sm-8">
