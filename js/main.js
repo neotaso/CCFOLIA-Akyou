@@ -370,3 +370,9 @@ clipboard.on('error', function (e) {
   console.error('Action:', e.action);
   console.error('Trigger:', e.trigger);
 });
+
+// Option制御
+// id: string, checked: bool
+var enabletext = function (id, checked) {
+  document.getElementById(id).disabled = !checked;
+}

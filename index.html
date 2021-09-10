@@ -64,33 +64,86 @@
                 乗物欄をデータとして扱う
               </label>
             </div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="coolieCheck" disabled>
+              <label for="coolieCheck" class="form-check-label">
+                苦力をいい感じに処理する
+              </label>
+            </div>
           </div>
           <div class="g-4 m-2">
             <div class="m-2">ステータス追加(開発中)</div>
+            <div class=>
+              <div class="form-check form-check-inline form-align-top">
+                <input type="checkbox" class="form-check-input" id="costCheck" disabled>
+                <label for="costCheck" class="form-check-label">
+                  コスト
+                </label>
+              </div>
+              <div class="form-check form-check-inline form-align-top">
+                <input type="checkbox" class="form-check-input" id="mealCheck" disabled>
+                <label for="mealCheck" class="form-check-label">
+                  食事
+                </label>
+              </div>
+              <div class="form-check form-check-inline form-align-top">
+                <input type="checkbox" class="form-check-input" id="sakeCheck" disabled>
+                <label for="sakeCheck" class="form-check-label">
+                  酒
+                </label>
+              </div>
+              <div class="form-check form-check-inline form-align-top">
+                <input type="checkbox" class="form-check-input" id="moneyCheck" disabled>
+                <label for="moneyCheck" class="form-check-label">
+                  ジャリ銭
+                </label>
+              </div>
+              <div class="form-check form-check-inline form-align-top">
+                <input type="checkbox" class="form-check-input" id="freeCheck1"
+                  onclick="enabletext('freeform1',this.checked)" disabled>
+                <label for="freeCheck1" class="form-check-label">
+                  <input type="text" class="form-control form-control-sm" id="freeform1" disabled>
+                </label>
+              </div>
+              <div class="form-check form-check-inline form-align-top">
+                <input type="checkbox" class="form-check-input" id="freeCheck2"
+                  onclick="enabletext('freeform2',this.checked)" disabled>
+                <label for="freeCheck1" class="form-check-label">
+                  <input type="text" class="form-control form-control-sm" id="freeform2" disabled>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="g-4 m-2">
+            <div class="m-2">キャラデータ関連(開発中)</div>
             <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="costCheck" disabled>
-              <label for="costCheck" class="form-check-label">
-                コスト
+              <input type="checkbox" class="form-check-input" id="charaCheck" disabled>
+              <label for="charaCheck" class="form-check-label">
+                キャラデータを詳細化する(表の顔・好嫌・言語など)
               </label>
             </div>
             <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="mealCheck" disabled>
-              <label for="mealCheck" class="form-check-label">
-                食事
+              <input type="checkbox" class="form-check-input" id="memoCheck" disabled>
+              <label for="memoCheck" class="form-check-label">
+                メモ欄をその他に記載する
+              </label>
+            </div>
+          </div>
+          <div class="g-4 m-2">
+            <div class="m-2">DD向け(開発中)</div>
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="hideCheck" disabled>
+              <label for="hideCheck" class="form-check-label">
+                ステータスを隠す
               </label>
             </div>
             <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="sakeCheck" disabled>
-              <label for="sakeCheck" class="form-check-label">
-                酒
+              <input type="checkbox" class="form-check-input" id="memoCheck" disabled>
+              <label for="memoCheck" class="form-check-label">
+                盤面キャラ一覧に表示しない
               </label>
             </div>
-            <div class="form-check form-check-inline">
-              <input type="checkbox" class="form-check-input" id="moneyCheck" disabled>
-              <label for="moneyCheck" class="form-check-label">
-                ジャリ銭
-              </label>
-            </div>
+            <p>オプションテンプレ共有用URL生成(開発中)</p>
           </div>
         </div>
       </div>
