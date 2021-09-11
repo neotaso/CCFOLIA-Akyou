@@ -172,6 +172,13 @@ var charaData = function (jsonData) {
       commands: charaCommands,
     },
   };
+  if (document.getElementById("costCheck").checked == true) {
+    character.data.status.push({
+      label: "コスト",
+      value: parseInt(jsonData.base.abl.crime.value),
+      max: parseInt(jsonData.base.abl.crime.value)
+    })
+  }
   document.getElementById("chara").value = JSON.stringify(character);
 
   // 趣味
