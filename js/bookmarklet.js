@@ -1,0 +1,1 @@
+javascript: (function () { document.body.appendChild(document.createElement('script')).src = 'https://neotaso.github.io/CCFOLIA-Akyou/js/paste-equipment.js'; })();
