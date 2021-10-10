@@ -189,11 +189,11 @@ var charaData = function (jsonData) {
   // 異能
   let talent = jsonData.karma
     .filter((v) => v.talent.name != null)
-    .reduce((p, v) => p + v.talent.name + "\n", "");
+    .reduce((p, v) => p + v.talent.name + (v.name != null ? `(${v.name.charAt(0)})` : "") + "\n", "");
   // 代償
   let price = jsonData.karma
     .filter((v) => v.price.name != null)
-    .reduce((p, v) => p + v.price.name + "\n", "");
+    .reduce((p, v) => p + v.price.name + (v.name != null ? `(${v.name.charAt(0)})` : "") + "\n", "");
 
   let data = `\
 PC名 ${jsonData.base.name}
