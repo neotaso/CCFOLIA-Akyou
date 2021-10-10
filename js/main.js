@@ -105,7 +105,7 @@ var charaData = function (jsonData) {
 【攻撃力】${jsonData.base.power.attack}\
 【破壊力】${jsonData.base.power.destroy}`,
       initiative: parseInt(jsonData.base.power.initiative),
-      externalUrl: "",
+      externalUrl: document.getElementById("targetUrl").value,
       status: [
         {
           label: "肉体点",
