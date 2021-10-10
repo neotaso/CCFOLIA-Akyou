@@ -206,7 +206,12 @@ ${fav}
 ${talent}
 -代償-
 ${price}
--その他-  
+-その他-
+トラウマ: ${jsonData.cond.trauma.value ?? 0}
+中毒: ${jsonData.cond.addiction.value ?? ""}
+トリコ: ${jsonData.cond.prisoner.value ?? ""}
+SAN: ${jsonData.cond.san.value ?? ""}
+クトゥルフ神話知識: ${jsonData.cond.cthulhu.value ?? ""}
 `;
   document.getElementById("data").value = data;
 };
