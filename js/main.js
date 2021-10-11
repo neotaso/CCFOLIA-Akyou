@@ -65,6 +65,16 @@ var full2half = function (str) {
   return str;
 };
 
+var add_parenthesis = function (target, str = null) {
+  if (target != null) {
+    if (str != null) {
+      return "(" + str + ")";
+    }
+    else return "(" + target + ")"
+  }
+  else return "";
+}
+
 var run = function () {
   var target = document.getElementById("targetUrl").value;
   // target URL format: https://character-sheets.appspot.com/satasupe/edit.html?key=XXXXXX
@@ -86,13 +96,23 @@ var vehicleParameter = function (vehicle) {
   return `(ス${vehicle.speed ?? "X"}, 車${vehicle.frame ?? "X"}, 荷${vehicle.burden ?? "X"})`
 };
 
+var alliance = function (jsonData) {
+  if (jsonData.base.alliance != null) {
+    if (jsonData.base.hierarchy != null) {
+      return jsonData.base.alliance + "/" + jsonData.base.hierarchy;
+    }
+    else return jsonData.base.alliance;
+  }
+  else return "";
+}
+
 var charaData = function (jsonData) {
   let character = {
     kind: "character",
     data: {
       name: jsonData.base.name,
       memo: `【PL名】${jsonData.base.player}
-【PC名】${jsonData.base.name}
+【PC名】${jsonData.base.name} ${add_parenthesis(jsonData.base.nameKana)}
 【犯罪】${jsonData.base.abl.crime.value}\
 【生活】${jsonData.base.abl.life.value}\
 【恋愛】${jsonData.base.abl.love.value}\
@@ -103,9 +123,12 @@ var charaData = function (jsonData) {
 【性業値】${jsonData.base.emotion}
 【反応力】${jsonData.base.power.initiative}\
 【攻撃力】${jsonData.base.power.attack}\
-【破壊力】${jsonData.base.power.destroy}`,
+【破壊力】${jsonData.base.power.destroy}
+
+${document.getElementById("memoCheck").checked ? jsonData.base.memo : ""}
+`,
       initiative: parseInt(jsonData.base.power.initiative),
-      externalUrl: "",
+      externalUrl: document.getElementById("targetUrl").value,
       status: [
         {
           label: "肉体点",
@@ -189,14 +212,28 @@ var charaData = function (jsonData) {
   // 異能
   let talent = jsonData.karma
     .filter((v) => v.talent.name != null)
-    .reduce((p, v) => p + v.talent.name + "\n", "");
+    .reduce((p, v) => p + v.talent.name + add_parenthesis(v.name, v.name.charAt(0)) + "\n", "");
   // 代償
   let price = jsonData.karma
     .filter((v) => v.price.name != null)
-    .reduce((p, v) => p + v.price.name + "\n", "");
+    .reduce((p, v) => p + v.price.name + add_parenthesis(v.name, v.name.charAt(0)) + "\n", "");
+
+  // 詳細キャラデータ
+  var charaDetailData = "";
+  if (document.getElementById("charaCheck").checked == true) {
+    charaDetailData = `
+表の顔 ${jsonData.base.surface}
+故郷 ${jsonData.base.homeland}
+外見 ${jsonData.base.style}
+好 ${jsonData.base.likes} 嫌 ${jsonData.base.dislikes}
+好きな映画 ${jsonData.base.movie}
+言語 ${jsonData.base.langueges}
+盟約 ${alliance(jsonData)}
+`
+  }
 
   let data = `\
-PC名 ${jsonData.base.name}
+PC名 ${jsonData.base.name} ${add_parenthesis(jsonData.base.nameKana)}
 年齢 ${jsonData.base.age} 性別 ${jsonData.base.sex}
 好み ${jsonData.base.favorites}
 
@@ -206,7 +243,13 @@ ${fav}
 ${talent}
 -代償-
 ${price}
--その他-  
+-その他-
+トラウマ: ${jsonData.cond.trauma.value ?? 0}
+中毒: ${jsonData.cond.addiction.value ?? ""}
+トリコ: ${jsonData.cond.prisoner.value ?? ""}
+SAN: ${jsonData.cond.san.value ?? ""}
+クトゥルフ神話知識: ${jsonData.cond.cthulhu.value ?? ""}
+${charaDetailData}
 `;
   document.getElementById("data").value = data;
 };

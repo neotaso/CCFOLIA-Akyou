@@ -17,4 +17,7 @@
 .history
 .ionide
 
+### development temp folder
+.tmp
+
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,ruby
