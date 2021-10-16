@@ -35,17 +35,17 @@ const favorites = {
 const charaCommands = `-汎用-
 SR{性業値} 【性業値判定】
 
-{犯罪}R>=[,,]
-{生活}R>=[,,]
-{恋愛}R>=[,,]
-{教養}R>=[,,]
-{戦闘}R>=[,,]
-{肉体}R>=[,,]
-{精神}R>=[,,]
+{犯罪}R>=X[,1,13]
+{生活}R>=X[,1,13]
+{恋愛}R>=X[,1,13]
+{教養}R>=X[,1,13]
+{戦闘}R>=X[,1,13]
+{肉体}R>=X[,1,13]
+{精神}R>=X[,1,13]
 
-{肉体}R>=X[,1,13]【セーブ判定】
+{肉体}R>=X[,1,13] 【セーブ判定】
 {肉体}R>=X[1,2,13] 【セーブ判定(跳ぶ)】
-{肉体}R>=7[1,1,13]  【バッドトリップ判定(酒)】
+{肉体}R>=7[1,1,13] 【バッドトリップ判定(酒)】
 {教養}R>=X[4,1,13] 【リンク判定(教養)】
 CultureIET 【教養イベント表】
 CultureIHT 【教養ハプニング表】
@@ -58,6 +58,18 @@ CultureIHT 【教養ハプニング表】
 -代償-
 `;
 
+var dicebot = function (title, hantei, difficalty = "X", fumble = "1", hissatu = "13", clear = "") {
+  var text = `{${hantei}}R>=${difficalty}[${clear},${fumble},${hissatu}]`
+  if (title != null) text + ` 【${title}】`;
+  return text
+}
+
+weapon_hantei = function (weapon) {
+
+  return dicebot()
+}
+
+
 var full2half = function (str) {
   str = str.replace(/[０-９]/g, function (s) {
     return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
@@ -65,12 +77,12 @@ var full2half = function (str) {
   return str;
 };
 
-var add_parenthesis = function (target, str = null) {
+var add_parenthesis = function (target, charAt = -1) {
   if (target != null) {
-    if (str != null) {
-      return "(" + str + ")";
+    if (charAt > -1) {
+      return "(" + target.charAt(charAt) + ")";
     }
-    else return "(" + target + ")"
+    else return "(" + target + ")";
   }
   else return "";
 }
@@ -212,11 +224,11 @@ ${document.getElementById("memoCheck").checked ? jsonData.base.memo : ""}
   // 異能
   let talent = jsonData.karma
     .filter((v) => v.talent.name != null)
-    .reduce((p, v) => p + v.talent.name + add_parenthesis(v.name, v.name.charAt(0)) + "\n", "");
+    .reduce((p, v) => p + v.talent.name + add_parenthesis(v.name, 0) + "\n", "");
   // 代償
   let price = jsonData.karma
     .filter((v) => v.price.name != null)
-    .reduce((p, v) => p + v.price.name + add_parenthesis(v.name, v.name.charAt(0)) + "\n", "");
+    .reduce((p, v) => p + v.price.name + add_parenthesis(v.name, 0) + "\n", "");
 
   // 詳細キャラデータ
   var charaDetailData = "";
