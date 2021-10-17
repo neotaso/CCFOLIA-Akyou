@@ -224,11 +224,11 @@ ${document.getElementById("memoCheck").checked ? jsonData.base.memo : ""}
   // 異能
   let talent = jsonData.karma
     .filter((v) => v.talent.name != null)
-    .reduce((p, v) => p + v.talent.name + add_parenthesis(v.name, 0) + "\n", "");
+    .reduce((p, v) => p + v.talent.name.replace(/\r?\n/g, "") + add_parenthesis(v.name, 0) + "\n", "");
   // 代償
   let price = jsonData.karma
     .filter((v) => v.price.name != null)
-    .reduce((p, v) => p + v.price.name + add_parenthesis(v.name, 0) + "\n", "");
+    .reduce((p, v) => p + v.price.name.replace(/\r?\n/g, "") + add_parenthesis(v.name, 0) + "\n", "");
 
   // 詳細キャラデータ
   var charaDetailData = "";
