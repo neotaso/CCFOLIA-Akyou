@@ -219,16 +219,16 @@ ${document.getElementById("memoCheck").checked ? jsonData.base.memo : ""}
   // 趣味
   let fav = jsonData.learned
     .filter((v) => v.id != null)
-    .reduce((p, v) => p + favorites[v.id] + "\n", "");
+    .reduce((p, v) => p + favorites[v.id] + " ", "");
 
   // 異能
   let talent = jsonData.karma
     .filter((v) => v.talent.name != null)
-    .reduce((p, v) => p + v.talent.name.replace(/\r?\n/g, "") + add_parenthesis(v.name, 0) + "\n", "");
+    .reduce((p, v) => p + v.talent.name.replace(/\r?\n/g, "") + add_parenthesis(v.name, 0) + " ", "");
   // 代償
   let price = jsonData.karma
     .filter((v) => v.price.name != null)
-    .reduce((p, v) => p + v.price.name.replace(/\r?\n/g, "") + add_parenthesis(v.name, 0) + "\n", "");
+    .reduce((p, v) => p + v.price.name.replace(/\r?\n/g, "") + add_parenthesis(v.name, 0) + " ", "");
 
   // 詳細キャラデータ
   var charaDetailData = "";
@@ -240,7 +240,7 @@ ${document.getElementById("memoCheck").checked ? jsonData.base.memo : ""}
 好 ${jsonData.base.likes} 嫌 ${jsonData.base.dislikes}
 好きな映画 ${jsonData.base.movie}
 言語 ${jsonData.base.langueges}
-盟約 ${alliance(jsonData)}
+盟約 ${alliance(jsonData)}\
 `
   }
 
@@ -260,8 +260,8 @@ ${price}
 中毒: ${jsonData.cond.addiction.value ?? ""}
 トリコ: ${jsonData.cond.prisoner.value ?? ""}
 SAN: ${jsonData.cond.san.value ?? ""}
-クトゥルフ神話知識: ${jsonData.cond.cthulhu.value ?? ""}
-${charaDetailData}
+クトゥルフ神話知識: ${jsonData.cond.cthulhu.value ?? ""}\
+${charaDetailData}\
 `;
   document.getElementById("data").value = data;
 };
