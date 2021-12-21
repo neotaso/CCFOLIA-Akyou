@@ -32,43 +32,44 @@ const favorites = {
   "hobby.6_5": "ファッション",
 };
 
-const charaCommands = `-汎用-
-SR{性業値} 【性業値判定】
-
-{犯罪}R>=X[,1,13]
-{生活}R>=X[,1,13]
-{恋愛}R>=X[,1,13]
-{教養}R>=X[,1,13]
-{戦闘}R>=X[,1,13]
-{肉体}R>=X[,1,13]
-{精神}R>=X[,1,13]
-
-{肉体}R>=X[,1,13] 【セーブ判定】
-{肉体}R>=X[1,2,13] 【セーブ判定(跳ぶ)】
-{肉体}R>=7[1,1,13] 【バッドトリップ判定(酒)】
-{教養}R>=X[4,1,13] 【リンク判定(教養)】
-CultureIET 【教養イベント表】
-CultureIHT 【教養ハプニング表】
-
--アイテム-
-{攻撃力}R>=X[,1,13] 【武器(ダ+)】
-
--異能-
-
--代償-
-`;
-
-var dicebot = function (title, hantei, difficalty = "X", fumble = "1", hissatu = "13", clear = "") {
-  var text = `{${hantei}}R>=${difficalty}[${clear},${fumble},${hissatu}]`
-  if (title != null) text + ` 【${title}】`;
+var satasupe_dicebot = function (title, hantei, difficalty = "X", clear = "", fumble = 1, hissatu = 13) {
+  var text = `({${hantei}})R>=${difficalty}[${clear},${fumble},${hissatu}]`
+  if (title != null) text += ` 【${title}】`;
   return text
 }
 
 weapon_hantei = function (weapon) {
 
-  return dicebot()
+  return satasupe_dicebot()
 }
 
+
+const charaCommands = `-汎用-
+SR{性業値} 【性業値判定】
+
+${satasupe_dicebot(null, "犯罪")}
+${satasupe_dicebot(null, "生活")}
+${satasupe_dicebot(null, "恋愛")}
+${satasupe_dicebot(null, "教養")}
+${satasupe_dicebot(null, "戦闘")}
+${satasupe_dicebot(null, "肉体")}
+${satasupe_dicebot(null, "精神")}
+
+${satasupe_dicebot("セーブ判定", "肉体")}
+${satasupe_dicebot("セーブ判定(跳ぶ)", "肉体", "X", "1", 2)}
+${satasupe_dicebot("バッドトリップ判定(酒)", "肉体", "7", 1)}
+${satasupe_dicebot("リンク判定(教養)", "教養", "X", "4")}
+${satasupe_dicebot("リンク判定(犯罪)", "犯罪", "X", "4")}
+CultureIET 【教養イベント表】
+CultureIHT 【教養ハプニング表】
+
+-アイテム-
+${satasupe_dicebot("武器(ダ+)", "攻撃力")}
+
+-異能-
+
+-代償-
+`;
 
 var full2half = function (str) {
   str = str.replace(/[０-９]/g, function (s) {
@@ -135,9 +136,9 @@ var charaData = function (jsonData) {
 【性業値】${jsonData.base.emotion}
 【反応力】${jsonData.base.power.initiative}\
 【攻撃力】${jsonData.base.power.attack}\
-【破壊力】${jsonData.base.power.destroy}
-
-${document.getElementById("memoCheck").checked ? jsonData.base.memo : ""}
+【破壊力】${jsonData.base.power.destroy}\
+\
+${document.getElementById("memoCheck").checked ? "\n\n" + jsonData.base.memo : ""}\
 `,
       initiative: parseInt(jsonData.base.power.initiative),
       externalUrl: document.getElementById("targetUrl").value,
@@ -251,10 +252,13 @@ PC名 ${jsonData.base.name} ${add_parenthesis(jsonData.base.nameKana)}
 
 -趣味-
 ${fav}
+
 -異能-
 ${talent}
+
 -代償-
 ${price}
+
 -その他-
 トラウマ: ${jsonData.cond.trauma.value ?? 0}
 中毒: ${jsonData.cond.addiction.value ?? ""}
