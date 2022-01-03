@@ -337,10 +337,20 @@ var vehicleEquipment = function (jsonData) {
     .filter((v) => v.name != null && v.place == "乗物")
     .map((v) => v.name);
   let burdenItems = burdenWeapons.concat(burdenOutfits);
+
+  //荷物欄が空欄だった時の処理
+  if (vehicle.burden == null) {
+    vehicle.burden = 0;
+  }
+
   if (burdenItems.length < vehicle.burden) {
     let oldlen = burdenItems.length;
     burdenItems.length = vehicle.burden;
     burdenItems.fill("", oldlen);
+  }
+
+  if (vehicle.burden == 0) {
+    vehicle.burden = "X";
   }
 
   let vehicles = `${vehicle.name ?? "乗物"}${vehicleParameter(vehicle)}\n`;
