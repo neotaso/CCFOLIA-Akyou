@@ -354,7 +354,7 @@ var vehicleEquipment = function (jsonData) {
   }
 
   let vehicles = `${vehicle.name ?? "乗物"}${vehicleParameter(vehicle)}\n`;
-  if (vehicle.burden != null) {
+  if (burdenItems.length != 0) {
     vehicles =
       vehicles + burdenItems.reduce((p, c, i) => p + `${i + 1}. ${c}\n`, "");
   } else {
