@@ -72,6 +72,10 @@ ${satasupe_dicebot("武器(ダ+)", "攻撃力")}
 `;
 
 var full2half = function (str) {
+  if (!str || isNaN(str)) {
+    alert('性業値欄に数字を入力してください！');
+    throw new Error('性業値欄に数字を入力してください！');
+  }
   str = str.replace(/[０-９]/g, function (s) {
     return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
   });
