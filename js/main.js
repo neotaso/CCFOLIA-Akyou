@@ -75,7 +75,8 @@ var full2half = function (str) {
   if(str === null || str === undefined) {
     return;
   }
-  if (isNaN(str)) {
+  str = str.replace(/[-－﹣−‐⁃‑‒–—﹘―⎯⏤ーｰ─━]/g, '-');
+  if (!str.match(/-?[0-9０-９]+/g)) {
     alert('性業値欄に数字を入力してください！');
     throw new Error('性業値欄に数字を入力してください！');
   }
