@@ -72,9 +72,23 @@ ${satasupe_dicebot("武器(ダ+)", "攻撃力")}
 `;
 
 var full2half = function (str) {
-  str = str.replace(/[０-９]/g, function (s) {
-    return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
-  });
+  if(str === null || str === undefined) {
+    return;
+  }
+  str = str.replace(/[-－﹣−‐⁃‑‒–—﹘―⎯⏤ーｰ─━]/g, '-');
+  if (!str.match(/-?[0-9０-９]+/g)) {
+    alert('性業値欄に数字を入力してください！');
+    throw new Error('性業値欄に数字を入力してください！');
+  }
+  str = str
+    .split('')
+    .map((s) => {
+      s = s.replace(/[０-９]/g, function (s) {
+        return String.fromCharCode(s.charCodeAt(0) - 0xfee0);
+        });
+      return s;
+    })
+    .join('');
   return str;
 };
 
